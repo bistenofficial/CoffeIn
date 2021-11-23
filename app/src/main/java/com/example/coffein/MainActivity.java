@@ -17,10 +17,11 @@ private SliderAdapter sliderAdapter;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mSlidePager = (ViewPager) findViewById(R.id.slideViewPager);
-        mDotlayout = (LinearLayout) findViewById(R.id.dotsLayout);
-
-        sliderAdapter = new SliderAdapter(this);
-        mSlidePager.setAdapter(sliderAdapter);
+//
+//        mSlidePager = (ViewPager) findViewById(R.id.slideViewPager);
+//        mDotlayout = (LinearLayout) findViewById(R.id.dotsLayout);
+//
+//        sliderAdapter = new SliderAdapter(this);
+//        mSlidePager.setAdapter(sliderAdapter);
     }
 }
