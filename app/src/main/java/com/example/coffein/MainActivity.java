@@ -27,6 +27,8 @@ private SliderAdapter sliderAdapter;
         setContentView(R.layout.activity_main);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        DBHelper dbHelper;
+        dbHelper = new DBHelper(this);
 
 //
 //        mSlidePager = (ViewPager) findViewById(R.id.slideViewPager);
