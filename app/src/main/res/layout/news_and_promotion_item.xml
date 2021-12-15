@@ -6,9 +6,10 @@
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="160dp"
-        android:layout_height="92dp"
+        android:layout_width="250dp"
+        android:layout_height="140.63dp"
         android:layout_marginStart="24dp"
+        app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -16,8 +17,8 @@
 
         <ImageView
             android:id="@+id/imageViewNAP"
-            android:layout_width="159dp"
-            android:layout_height="93dp"
+            android:layout_width="250dp"
+            android:layout_height="140.63dp"
             app:srcCompat="@drawable/ic_launcher_background" />
     </androidx.cardview.widget.CardView>
 

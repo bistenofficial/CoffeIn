@@ -35,6 +35,8 @@ private SliderAdapter sliderAdapter;
 //        sliderAdapter = new SliderAdapter(this);
 //        mSlidePager.setAdapter(sliderAdapter);
         RecyclerView rvContacts = (RecyclerView) findViewById(R.id.NAPRecycler);
+        newsAndPromotionArrayList.add(new NewsAndPromotion("coffeepromotion"));
+        newsAndPromotionArrayList.add(new NewsAndPromotion("promotioncoffee"));
         newsAndPromotionArrayList.add(new NewsAndPromotion("coffee"));
         newsAndPromotionArrayList.add(new NewsAndPromotion("coffee"));
         // Initialize contacts
