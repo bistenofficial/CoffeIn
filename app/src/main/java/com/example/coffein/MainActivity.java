@@ -10,17 +10,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
+import com.example.coffein.adapters.RecyclerViewAdapterNewsAndPromotion;
+import com.example.coffein.adapters.SliderAdapter;
 import com.example.coffein.model.NewsAndPromotion;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-private ViewPager mSlidePager;
-private LinearLayout mDotlayout;
 static ArrayList<NewsAndPromotion> newsAndPromotionArrayList = new ArrayList<>();
-private SliderAdapter sliderAdapter;
+int i = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,12 +29,6 @@ private SliderAdapter sliderAdapter;
         DBHelper dbHelper;
         dbHelper = new DBHelper(this);
 
-//
-//        mSlidePager = (ViewPager) findViewById(R.id.slideViewPager);
-//        mDotlayout = (LinearLayout) findViewById(R.id.dotsLayout);
-//
-//        sliderAdapter = new SliderAdapter(this);
-//        mSlidePager.setAdapter(sliderAdapter);
         RecyclerView rvContacts = (RecyclerView) findViewById(R.id.NAPRecycler);
         newsAndPromotionArrayList.add(new NewsAndPromotion("coffeepromotion"));
         newsAndPromotionArrayList.add(new NewsAndPromotion("promotioncoffee"));
@@ -48,6 +41,12 @@ private SliderAdapter sliderAdapter;
         rvContacts.setAdapter(adapter);
         // Set layout manager to position the items
         rvContacts.setLayoutManager(new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false));
+        if (i==0)
+        {
+            Intent intent = new Intent(this, SliderActivity.class);
+            startActivity(intent);
+        }
+        i++;
     }
 
     public void goToQR(View view)

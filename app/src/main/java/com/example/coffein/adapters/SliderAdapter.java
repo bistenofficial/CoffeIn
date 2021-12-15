@@ -1,4 +1,4 @@
-package com.example.coffein;
+package com.example.coffein.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,7 +8,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager.widget.PagerAdapter;
+
+import com.example.coffein.R;
 
 import org.w3c.dom.Text;
 
@@ -32,7 +35,7 @@ public String[] slide_headings =
 
     @Override
     public boolean isViewFromObject(@NonNull View view, @NonNull Object o) {
-        return view == (RelativeLayout) o;
+        return view == (ConstraintLayout) o;
     }
     @Override
     public Object instantiateItem(ViewGroup container,int position)
