@@ -43,12 +43,18 @@ private int i;
         {
             Intent intent = new Intent(this, SliderActivity.class);
             startActivity(intent);
+            finish();
         };
     }
 
     public void goToQR(View view)
     {
         Intent intent = new Intent(this, SplashActivity.class);
+        startActivity(intent);
+    }
+    public void goToMaps(View view)
+    {
+        Intent intent = new Intent(this, MapsActivity.class);
         startActivity(intent);
     }
 }

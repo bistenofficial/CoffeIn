@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -43,6 +44,10 @@ public class SliderAdapter extends PagerAdapter {
                     Color.rgb(255, 255, 255),
                     Color.rgb(245, 163, 199)
             };
+    public int[] slide_image =
+        {
+               R.drawable.coffee,R.drawable.coffee,R.drawable.coffee,R.drawable.coffee
+        };
 
     @Override
     public int getCount() {
@@ -63,6 +68,9 @@ public class SliderAdapter extends PagerAdapter {
         TextView slideHeading = (TextView) view.findViewById(R.id.slide_heading);
         TextView slideText = (TextView) view.findViewById(R.id.slide_text);
         Button btn = (Button) view.findViewById(R.id.buttonGoToAuth);
+        ImageView imgSlider = (ImageView) view.findViewById(R.id.imageViewSlider);
+
+        imgSlider.setImageResource(slide_image[position]);
         slideText.setText(slide_text[position]);
         view.setBackgroundColor(colors[position]);
         slideHeading.setText(slide_headings[position]);
