@@ -70,6 +70,7 @@ public class SliderAdapter extends PagerAdapter {
         Button btn = (Button) view.findViewById(R.id.buttonGoToAuth);
         ImageView imgSlider = (ImageView) view.findViewById(R.id.imageViewSlider);
 
+
         imgSlider.setImageResource(slide_image[position]);
         slideText.setText(slide_text[position]);
         view.setBackgroundColor(colors[position]);

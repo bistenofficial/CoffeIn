@@ -8,6 +8,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
@@ -16,15 +17,18 @@ import com.example.coffein.adapters.SliderAdapter;
 import com.example.coffein.model.NewsAndPromotion;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+{
+
 static ArrayList<NewsAndPromotion> newsAndPromotionArrayList = new ArrayList<>();
 private int i;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        setContentView(R.layout.activity_main);
         DBHelper dbHelper;
         dbHelper = new DBHelper(this);
         RecyclerView rvContacts = (RecyclerView) findViewById(R.id.NAPRecycler);
@@ -51,10 +55,12 @@ private int i;
     {
         Intent intent = new Intent(this, SplashActivity.class);
         startActivity(intent);
+        finish();
     }
     public void goToMaps(View view)
     {
         Intent intent = new Intent(this, MapsActivity.class);
         startActivity(intent);
+        finish();
     }
 }
