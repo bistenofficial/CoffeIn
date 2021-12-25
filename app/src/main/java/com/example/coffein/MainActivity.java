@@ -1,66 +1,86 @@
 package com.example.coffein;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
+import android.view.View;
+import android.view.WindowManager;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.LinearLayout;
 
 import com.example.coffein.adapters.RecyclerViewAdapterNewsAndPromotion;
-import com.example.coffein.adapters.SliderAdapter;
 import com.example.coffein.model.NewsAndPromotion;
+
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity
-{
+public class MainActivity extends AppCompatActivity {
 
-static ArrayList<NewsAndPromotion> newsAndPromotionArrayList = new ArrayList<>();
-private int i;
+    static ArrayList<NewsAndPromotion> newsAndPromotionArrayList = new ArrayList<>();
+    private int i;
+    DBHelper dbHelper;
+    SharedPreferences mSettings;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         setContentView(R.layout.activity_main);
-        DBHelper dbHelper;
+        mSettings = getSharedPreferences("my_storage", Context.MODE_PRIVATE);
         dbHelper = new DBHelper(this);
         RecyclerView rvContacts = (RecyclerView) findViewById(R.id.NAPRecycler);
         newsAndPromotionArrayList.add(new NewsAndPromotion("coffeepromotion"));
         newsAndPromotionArrayList.add(new NewsAndPromotion("promotioncoffee"));
         newsAndPromotionArrayList.add(new NewsAndPromotion("coffee"));
         newsAndPromotionArrayList.add(new NewsAndPromotion("coffee"));
-        i = getIntent().getIntExtra("isLogin",0);
+
         // Create adapter passing in the sample user data
-        RecyclerViewAdapterNewsAndPromotion adapter = new RecyclerViewAdapterNewsAndPromotion(this,newsAndPromotionArrayList);
+        RecyclerViewAdapterNewsAndPromotion adapter = new RecyclerViewAdapterNewsAndPromotion(this, newsAndPromotionArrayList);
         // Attach the adapter to the recyclerview to populate items
         rvContacts.setAdapter(adapter);
         // Set layout manager to position the items
-        rvContacts.setLayoutManager(new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false));
-        if (i==0)
+        rvContacts.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
+        if (mSettings.getBoolean("is_logged", false))
         {
-            Intent intent = new Intent(this, SliderActivity.class);
-            startActivity(intent);
-            finish();
-        };
+
+        }
+        else
+            {
+                Intent intent = new Intent(this, SliderActivity.class);
+                startActivity(intent);
+                finish();
+            }
     }
 
-    public void goToQR(View view)
-    {
+    public void goToQR(View view) {
         Intent intent = new Intent(this, SplashActivity.class);
         startActivity(intent);
         finish();
     }
-    public void goToMaps(View view)
+    public void Exit(View view)
     {
-        Intent intent = new Intent(this, MapsActivity.class);
+        SharedPreferences mSettings = getSharedPreferences("my_storage", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = mSettings.edit();
+        editor.putBoolean("is_logged", false).apply();
+
+        Intent intent = new Intent(this, SliderActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    public void goToMaps(View view) {
+        Intent intent = new Intent(this, MapsActivity.class);
+        startActivity(intent);
+    }
+
+    public void AuthCheck()
+    {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        ContentValues cv = new ContentValues();
+        SQLiteDatabase dbWrite = dbHelper.getWritableDatabase();
     }
 }

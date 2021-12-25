@@ -53,8 +53,7 @@ public class SliderActivity extends AppCompatActivity {
     }
 
     public void GoToAuth(View v) {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("isLogin", 1);
+        Intent intent = new Intent(this, AuthActivity.class);
         startActivity(intent);
         finish();
     }
