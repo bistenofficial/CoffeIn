@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.coffein.R;
@@ -15,10 +16,10 @@ import java.util.List;
 
 public class RecyclerViewAdapterNewsAndPromotion extends RecyclerView.Adapter<RecyclerViewAdapterNewsAndPromotion.ViewHolder>
 {
-    private List<NewsAndPromotion> newsAndPromotionList;
+    private final List<NewsAndPromotion> newsAndPromotionList;
     Context context;
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageViewNAP;
 
         public ViewHolder(View itemView)
@@ -27,6 +28,7 @@ public class RecyclerViewAdapterNewsAndPromotion extends RecyclerView.Adapter<Re
             imageViewNAP = (ImageView)itemView.findViewById(R.id.imageViewNAP);
         }
     }
+    @NonNull
     @Override
     public RecyclerViewAdapterNewsAndPromotion.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
@@ -36,15 +38,13 @@ public class RecyclerViewAdapterNewsAndPromotion extends RecyclerView.Adapter<Re
         View contactView = inflater.inflate(R.layout.news_and_promotion_item, parent, false);
 
         // Return a new holder instance
-        ViewHolder viewHolder = new ViewHolder(contactView);
-        return viewHolder;
+        return new ViewHolder(contactView);
     }
 
     // Involves populating data into the item through holder
     @Override
     public void onBindViewHolder(RecyclerViewAdapterNewsAndPromotion.ViewHolder holder, int position) {
         // Get the data model based on position
-        NewsAndPromotion contact = newsAndPromotionList.get(position);
         int imageId = context.getResources().getIdentifier(newsAndPromotionList.get(position).getImg(), "drawable", context.getPackageName());
         holder.imageViewNAP .setImageResource(imageId);
     }

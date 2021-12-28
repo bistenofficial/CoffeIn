@@ -22,9 +22,7 @@ import androidx.core.app.NotificationManagerCompat;
 import java.util.Random;
 
 public class AuthActivity extends AppCompatActivity {
-    private NotificationManagerCompat manager;
     public static final String NORMAL_CHANNEL = "Normal_Channel";
-    public static final String IMPORTANT_CHANNEL = "IMPORTANT_CHANNEL";
     public int code;
     EditText editCode;
     DBHelper dbHelper;
@@ -62,7 +60,7 @@ public class AuthActivity extends AppCompatActivity {
     }
 
     public void VisibleInvisible(View v) {
-        manager = NotificationManagerCompat.from(this);
+        NotificationManagerCompat manager = NotificationManagerCompat.from(this);
         EditText textInputEdittext = (EditText) findViewById(R.id.textInputEditText);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -111,6 +109,7 @@ public class AuthActivity extends AppCompatActivity {
                 TextClick.setText("Отправить код повторно");
                 editCode.setVisibility(View.VISIBLE);
                 enter.setVisibility(View.VISIBLE);
+                c.close();
             } else {
                 Toast toast = Toast.makeText(AuthActivity.this, "Пользователь не зарегестрирован", Toast.LENGTH_LONG);
                 toast.show();

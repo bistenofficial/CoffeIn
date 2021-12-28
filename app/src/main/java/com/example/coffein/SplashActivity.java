@@ -16,20 +16,17 @@ public class SplashActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
-        Thread thread = new Thread() {
-            @Override
-            public void run() {
-                try {
-                    TimeUnit.MILLISECONDS.sleep(1500);
-                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                } catch (InterruptedException e)
-                {
-                    e.printStackTrace();
-                }
+        Thread thread = new Thread(() -> {
+            try {
+                TimeUnit.MILLISECONDS.sleep(1500);
+                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            } catch (InterruptedException e)
+            {
+                e.printStackTrace();
             }
-        };
+        });
         thread.start();
     }
 }

@@ -25,13 +25,12 @@
             app:srcCompat="@drawable/ic_baseline_arrow_forward_ios_24" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/textViewPoints"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_marginStart="276dp"
             android:fontFamily="@font/montserrat"
             android:gravity="center_vertical|end"
-            android:text="0 Coin"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold"

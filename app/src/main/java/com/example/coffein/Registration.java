@@ -16,11 +16,9 @@ import java.util.regex.Pattern;
 
 public class Registration extends AppCompatActivity {
     DBHelper dbHelper;
-
-    private Pattern regexPattern;
-    private Matcher regMatcher;
     Toast toast;
-
+    public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
+            Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +33,7 @@ public class Registration extends AppCompatActivity {
         EditText editTextName = (EditText) findViewById(R.id.editTextTextPersonName);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
-        if ((editTextPhone.length() == 12) && validateEmailAddress(editTextMail.toString())) {
+        if ((editTextPhone.length() == 12) && validateEmailAddress(editTextMail.getText().toString())) {
             Cursor c = db.rawQuery("select * from users where phone = ? ", new String[]{editTextPhone.getText().toString()});
             if (c.getCount() == 0) {
                 ContentValues cv = new ContentValues();
@@ -56,6 +54,7 @@ public class Registration extends AppCompatActivity {
             else{
                 toast = Toast.makeText(Registration.this, "Пользователь уже зарегестрирован", Toast.LENGTH_LONG);
                 toast.show();
+                c.close();
             }
         } else {
             Toast toast = Toast.makeText(Registration.this, "Проверте введеные данные", Toast.LENGTH_LONG);
@@ -64,13 +63,7 @@ public class Registration extends AppCompatActivity {
     }
 
     public boolean validateEmailAddress(String emailAddress) {
-        regexPattern = Pattern.compile("^[(a-zA-Z-0-9-\\_\\+\\.)]+@[(a-z-A-z)]+\\.[(a-zA-z)]{2,3}$");
-        regMatcher = regexPattern.matcher(emailAddress);
-
-        if (regMatcher.matches()) {
-            return true;
-        } else {
-            return false;
-        }
+        Matcher regMatcher = VALID_EMAIL_ADDRESS_REGEX .matcher(emailAddress);
+        return regMatcher.matches();
     }
 }

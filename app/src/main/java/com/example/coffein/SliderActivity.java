@@ -3,7 +3,6 @@ package com.example.coffein;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Html;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
@@ -15,10 +14,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.coffein.adapters.SliderAdapter;
 
 public class SliderActivity extends AppCompatActivity {
-    private ViewPager mSlidePager;
     private LinearLayout mDotlayout;
-    private SliderAdapter sliderAdapter;
-    private TextView[] mDots;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,17 +22,17 @@ public class SliderActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_slider);
-        mSlidePager = (ViewPager) findViewById(R.id.slideViewPager);
+        ViewPager mSlidePager = (ViewPager) findViewById(R.id.slideViewPager);
         mDotlayout = (LinearLayout) findViewById(R.id.dotsLayout);
 
-        sliderAdapter = new SliderAdapter(this);
+        SliderAdapter sliderAdapter = new SliderAdapter(this);
         mSlidePager.setAdapter(sliderAdapter);
         addDotsIndicator(0);
         mSlidePager.addOnPageChangeListener(changeListener);
     }
 
     public void addDotsIndicator(int position) {
-        mDots = new TextView[4];
+        TextView[] mDots = new TextView[4];
         mDotlayout.removeAllViews();
         for (int i = 0; i < mDots.length; i++) {
             mDots[i] = new TextView(this);

@@ -37,7 +37,7 @@ public class SliderAdapter extends PagerAdapter {
                     "Оплачивайте заказ онлайн и забирайте в удобной кофейне",
                     "Следите за нашими специальными\nакциями и конкурсами"
             };
-    public int colors[] =
+    public int[] colors =
             {
                     Color.rgb(255, 255, 255),
                     Color.rgb(175, 205, 83),
@@ -59,9 +59,10 @@ public class SliderAdapter extends PagerAdapter {
         return view == (ConstraintLayout) o;
     }
 
+    @NonNull
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
-        layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+    public Object instantiateItem(@NonNull ViewGroup container, int position) {
+        layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         View view = layoutInflater.inflate(R.layout.slide_layout, container, false);
 
@@ -87,7 +88,7 @@ public class SliderAdapter extends PagerAdapter {
     }
 
     @Override
-    public void destroyItem(ViewGroup container, int position, Object object) {
+    public void destroyItem(ViewGroup container, int position, @NonNull Object object) {
         container.removeView((ConstraintLayout) object);
     }
 }
