@@ -24,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     private int i;
     DBHelper dbHelper;
     SharedPreferences mSettings;
+    String Phone;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
         newsAndPromotionArrayList.add(new NewsAndPromotion("coffeepromotion"));
         newsAndPromotionArrayList.add(new NewsAndPromotion("promotioncoffee"));
         newsAndPromotionArrayList.add(new NewsAndPromotion("coffee"));
-        newsAndPromotionArrayList.add(new NewsAndPromotion("coffee"));
 
         // Create adapter passing in the sample user data
         RecyclerViewAdapterNewsAndPromotion adapter = new RecyclerViewAdapterNewsAndPromotion(this, newsAndPromotionArrayList);
@@ -44,16 +45,13 @@ public class MainActivity extends AppCompatActivity {
         rvContacts.setAdapter(adapter);
         // Set layout manager to position the items
         rvContacts.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
-        if (mSettings.getBoolean("is_logged", false))
-        {
-
+        if (mSettings.getBoolean("is_logged", false)) {
+            Phone = mSettings.getString("Phone", "");
+        } else {
+            Intent intent = new Intent(this, SliderActivity.class);
+            startActivity(intent);
+            finish();
         }
-        else
-            {
-                Intent intent = new Intent(this, SliderActivity.class);
-                startActivity(intent);
-                finish();
-            }
     }
 
     public void goToQR(View view) {
@@ -61,11 +59,12 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-    public void Exit(View view)
-    {
+
+    public void Exit(View view) {
         SharedPreferences mSettings = getSharedPreferences("my_storage", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = mSettings.edit();
         editor.putBoolean("is_logged", false).apply();
+        editor.putString("Phone", "").apply();
 
         Intent intent = new Intent(this, SliderActivity.class);
         startActivity(intent);
@@ -75,12 +74,5 @@ public class MainActivity extends AppCompatActivity {
     public void goToMaps(View view) {
         Intent intent = new Intent(this, MapsActivity.class);
         startActivity(intent);
-    }
-
-    public void AuthCheck()
-    {
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-        ContentValues cv = new ContentValues();
-        SQLiteDatabase dbWrite = dbHelper.getWritableDatabase();
     }
 }

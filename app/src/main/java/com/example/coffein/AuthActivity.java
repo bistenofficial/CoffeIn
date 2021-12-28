@@ -2,7 +2,6 @@ package com.example.coffein;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -29,6 +28,7 @@ public class AuthActivity extends AppCompatActivity {
     public int code;
     EditText editCode;
     DBHelper dbHelper;
+    String Phone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,12 +42,15 @@ public class AuthActivity extends AppCompatActivity {
         editCode = (EditText) findViewById(R.id.editTextCode);
         SharedPreferences mSettings = getSharedPreferences("my_storage", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = mSettings.edit();
+
         if (editCode.length() == 0) {
             Toast toast = Toast.makeText(AuthActivity.this, "Вы ничего не ввели", Toast.LENGTH_LONG);
             toast.show();
         } else {
             if (Integer.parseInt(editCode.getText().toString()) == code) {
                 editor.putBoolean("is_logged", true).apply();
+                editor.putString("Phone", Phone).apply();
+
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
                 finish();
@@ -84,10 +87,10 @@ public class AuthActivity extends AppCompatActivity {
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
-        if(textInputEdittext.length()==12)
-        {
+        if (textInputEdittext.length() == 12) {
             Cursor c = db.rawQuery("select * from users where phone = ? ", new String[]{textInputEdittext.getText().toString()});
             if (c.getCount() > 0) {
+
                 NotificationCompat.Builder builder = new NotificationCompat.Builder(this, NORMAL_CHANNEL);
                 builder.setSmallIcon(android.R.drawable.sym_def_app_icon);
                 builder.setContentTitle("Код для авторизации");
@@ -99,6 +102,10 @@ public class AuthActivity extends AppCompatActivity {
                 TextView textViewCod = (TextView) findViewById(R.id.textViewCod);
                 EditText editCode = (EditText) findViewById(R.id.editTextCode);
                 Button enter = (Button) findViewById(R.id.btnEnter);
+                Phone = textInputEdittext.getText().toString();
+                textInputEdittext.setFocusable(false);
+                textInputEdittext.setFocusableInTouchMode(false);
+                textInputEdittext.setClickable(false);
 
                 textViewCod.setVisibility(View.VISIBLE);
                 TextClick.setText("Отправить код повторно");
@@ -108,12 +115,12 @@ public class AuthActivity extends AppCompatActivity {
                 Toast toast = Toast.makeText(AuthActivity.this, "Пользователь не зарегестрирован", Toast.LENGTH_LONG);
                 toast.show();
             }
-        }
-        else{
+        } else {
             Toast toast = Toast.makeText(AuthActivity.this, "Проверьте правильность введеного номера", Toast.LENGTH_LONG);
             toast.show();
         }
     }
+
     public void GoToReg(View view)
     {
         Intent intent = new Intent(this, Registration.class);

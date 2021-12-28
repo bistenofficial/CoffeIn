@@ -16,7 +16,7 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db)
     {
-        db.execSQL("CREATE TABLE IF NOT EXISTS users(" + "id integer primary key autoincrement," + "name text NOT NULL," + "email text," + "date_of_birth date," + "phone text NOT NULL," + "points integer" + ");");
+        db.execSQL("CREATE TABLE IF NOT EXISTS users(" + "id integer primary key autoincrement," + "name text NOT NULL," + "email text," + "date_of_birth date," + "phone text NOT NULL," + "points integer DEFAULT 0" + ");");
         db.execSQL("CREATE TABLE IF NOT EXISTS menu(" + "id integer primary key autoincrement," + "name text NOT NULL," + "info text NOT NULL," + "price integer NOT NULL," + "type integer," + "FOREIGN KEY (type) REFERENCES type (id)"+");");
         db.execSQL("CREATE TABLE IF NOT EXISTS orders (" + "id integer primary key autoincrement," + "date DATETIME," + "id_user integer," + "id_cof integer," + "FOREIGN KEY (id_cof) REFERENCES coffein (id)"+");");
         db.execSQL("CREATE TABLE IF NOT EXISTS order_menu (" + "id_order integer," + "id_menu integer," + "FOREIGN KEY (id_order) REFERENCES orders (id),"+"FOREIGN KEY (id_menu) REFERENCES menu (id)"+");");

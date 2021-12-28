@@ -7,21 +7,6 @@
     android:background="#000000"
     tools:context=".AuthActivity">
 
-    <Button
-        android:id="@+id/btnEnter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="152dp"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="#FFFFFF"
-        android:onClick="GoToMain"
-        android:text="Войти"
-        android:textColor="#000000"
-        android:visibility="invisible"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView4"
-        tools:clickable="false" />
-
     <ImageView
         android:id="@+id/imageView5"
         android:layout_width="wrap_content"
@@ -35,7 +20,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView4"
         android:layout_width="325dp"
-        android:layout_height="225dp"
+        android:layout_height="wrap_content"
         app:cardBackgroundColor="#afcd53"
         app:cardCornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -71,8 +56,8 @@
                 android:layout_marginTop="144dp"
                 android:background="@color/white"
                 android:fontFamily="@font/montserrat"
-                android:maxLength="6"
                 android:inputType="phone"
+                android:maxLength="6"
                 android:textColorHint="#8C8C8C"
                 android:textStyle="bold"
                 android:visibility="invisible"
@@ -133,6 +118,24 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/textInputEditText"
                 app:layout_constraintStart_toStartOf="parent" />
+
+            <Button
+                android:id="@+id/btnEnter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/montserrat"
+                android:onClick="GoToMain"
+                android:backgroundTint="#7153cd"
+                android:text="Войти"
+                android:visibility="invisible"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
