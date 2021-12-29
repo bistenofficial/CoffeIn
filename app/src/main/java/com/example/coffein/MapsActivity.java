@@ -1,6 +1,5 @@
 package com.example.coffein;
 
-import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -19,7 +18,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
-    ArrayList<CoffeeInLocate> locates= new ArrayList<CoffeeInLocate>();
+    ArrayList<CoffeeInLocate> locates = new ArrayList<CoffeeInLocate>();
     ArrayList<String> Street = new ArrayList<String>();
     private GoogleMap map;
     DBHelper dbHelper;
@@ -32,7 +31,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_maps);
-
         dbHelper = new DBHelper(this);
         SupportMapFragment supportMapFragment =
                 (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
@@ -43,10 +41,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap googleMap) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor c = db.rawQuery("select coordinate, name_street from coffein", new String[]{});
-        if (c.getCount() == 0) {
-            createList();
-            c = db.rawQuery("select coordinate, name_street from coffein", new String[]{});
-        }
         c.moveToFirst();
         map = googleMap;
         findSpb();
@@ -68,25 +62,5 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     CameraUpdateFactory.newLatLngZoom(spb, 11)
             );
         }
-    }
-
-    public void createList() {
-        ContentValues cv = new ContentValues();
-        SQLiteDatabase dw = dbHelper.getWritableDatabase();
-        cv.put("coordinate", "59.926334,30.297289");
-        cv.put("name_street", "Театральная площадь, 3");
-        dw.insert("coffein", null, cv);
-
-        cv.put("coordinate", "59.978283 ,30.349302");
-        cv.put("name_street", "Литовская улица, 6");
-        dw.insert("coffein", null, cv);
-
-        cv.put("coordinate", "59.833926 ,30.404899");
-        cv.put("name_street", "Будапештская улица, 104к1");
-        dw.insert("coffein", null, cv);
-
-        //states.add(new CoffeeInLocate(59.926334,30.297289));
-        //states.add(new CoffeeInLocate(59.978283 ,30.349302));
-        //states.add(new CoffeeInLocate(59.833926 ,30.404899));
     }
 }
